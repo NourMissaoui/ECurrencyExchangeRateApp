@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityComponent::class)
-class RemoteDataModule {
+object RemoteDataModule {
 
     @Singleton
     @Provides
