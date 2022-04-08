@@ -19,7 +19,7 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
     private lateinit var binding: FragmentCurrencyExchangeBinding
     var currencyList = arrayListOf<CurrencRateEntity>()
 
-    override fun onCreateView(
+    override fun onCreateView  (
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
