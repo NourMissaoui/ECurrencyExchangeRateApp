@@ -8,7 +8,6 @@ import com.example.ecurrencyexchangeapp.data.remote.entities.currencyRateEntitie
 import com.example.ecurrencyexchangeapp.domain.usecase.ExchangeRateUseCase
 import com.example.ecurrencyexchangeapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
