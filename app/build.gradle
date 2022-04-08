@@ -83,6 +83,7 @@ dependencies {
     //Country Flags
     implementation "com.github.blongho:worldCountryData:v1.5.2"
     implementation "androidx.fragment:fragment-ktx:1.4.1"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.6.10"
 
 
 }

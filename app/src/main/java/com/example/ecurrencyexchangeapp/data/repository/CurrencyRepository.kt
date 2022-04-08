@@ -1,12 +1,13 @@
 package com.example.ecurrencyexchangeapp.data.repository
 
 import com.example.ecurrencyexchangeapp.data.remote.CurrencyRemoteDataSource
-import com.example.ecurrencyexchangeapp.data.remote.entities.currencyRateRemoteEntities.CurrencyRateRemoteEntities
+import com.example.ecurrencyexchangeapp.domain.model.CurrencyRateRemoteEntities
+import com.example.ecurrencyexchangeapp.domain.repository.ICurrencyRepository
 import com.example.ecurrencyexchangeapp.utils.Resource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.example.ecurrencyexchangeapp.utils.utils.ratesToList
 import javax.inject.Inject
 
-class CurrencyRepository @Inject constructor( private val currencyRemoteDataSource: CurrencyRemoteDataSource) : ICurrencyRepository {
-    override suspend fun getCurrencyExchangeRate(base : String): Flow<Resource<CurrencyRateRemoteEntities>> = flowOf(currencyRemoteDataSource.getCurrencyExchangeRate(base))
+class CurrencyRepository @Inject constructor(private val currencyRemoteDataSource: CurrencyRemoteDataSource) :
+    ICurrencyRepository {
+    override suspend fun getCurrencyExchangeRate(base: String): Resource<CurrencyRateRemoteEntities>  = currencyRemoteDataSource.getCurrencyExchangeRate(base)
 }

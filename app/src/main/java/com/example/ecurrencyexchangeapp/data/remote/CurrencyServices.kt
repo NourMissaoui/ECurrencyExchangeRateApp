@@ -1,6 +1,6 @@
 package com.example.ecurrencyexchangeapp.data.remote
 
-import com.example.ecurrencyexchangeapp.data.remote.entities.currencyRateRemoteEntities.CurrencyRateRemoteEntities
+import com.example.ecurrencyexchangeapp.domain.model.CurrencyRateRemoteEntities
 import com.example.ecurrencyexchangeapp.utils.AppConstant.API_access_Key
 import retrofit2.Response
 import retrofit2.http.GET

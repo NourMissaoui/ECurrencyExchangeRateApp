@@ -1,4 +1,4 @@
-package com.example.ecurrencyexchangeapp.data.remote.entities.currencyRateRemoteEntities
+package com.example.ecurrencyexchangeapp.domain.model
 
 data class CurrencyRateRemoteEntities(
     val base: String,

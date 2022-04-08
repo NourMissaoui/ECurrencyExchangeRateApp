@@ -4,7 +4,7 @@ import java.io.Serializable
 
 
 data class CurrencRateEntity(
-    val Falg: Int? = 0,
-    val CountryName: String? = "",
-    val currencyRate: Double? = 0.0
+    var Falg: Int? = 0,
+    var CountryName: String? = "",
+    var currencyRate: String? = ""
 ) : Serializable
