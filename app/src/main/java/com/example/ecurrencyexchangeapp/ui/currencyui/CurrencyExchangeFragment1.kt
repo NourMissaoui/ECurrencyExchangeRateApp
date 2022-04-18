@@ -1,6 +1,7 @@
 package com.example.ecurrencyexchangeapp.ui.currencyui
 
 import android.content.ContentValues.TAG
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,6 +26,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
 
+    val TAG = "CurrencyExchangeFragment"
     private lateinit var binding: FragmentCurrencyExchangeBinding
     private val viewModel: CurrencyExchangeViewModel by viewModels()
     var currencyList: List<CurrencRateEntity>? = listOf<CurrencRateEntity>()
@@ -40,8 +42,10 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val flag = World.getFlagOf("se")
+        Log.i(TAG, "onViewCreated")
+
         val currencyRecyclerView = binding.rvCurrency
-        lifecycleScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             viewModel.curencyList.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
@@ -55,8 +59,15 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                         }
                     }
                     Resource.Status.ERROR -> {
+                        Log.i(TAG, "onViewCreated: nourERROR")
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
+                    Resource.Status.LOADING -> {
+                        Log.i(TAG, "onViewCreated: nour LOADING")
+
+
+                    }
+                    else -> {}
                 }
             }
             viewModel.getCurrencyList()

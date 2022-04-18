@@ -6,7 +6,7 @@ import kotlin.reflect.full.instanceParameter
 
 object utils {
     fun Rates.ratesToList(): List<CurrencRateEntity> {
-        var currencies = mutableListOf<CurrencRateEntity>()
+        val currencies = mutableListOf<CurrencRateEntity>()
         Rates::class.members.forEach {
             val currency = CurrencRateEntity().apply {
                 this.CountryName = it.name
