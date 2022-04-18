@@ -19,11 +19,8 @@ import com.example.ecurrencyexchangeapp.ui.currencyui.adapter.CurrencyExchangeRa
 import com.example.ecurrencyexchangeapp.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 
 @AndroidEntryPoint
 class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
@@ -45,7 +42,6 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
         val flag = World.getFlagOf("se")
         val currencyRecyclerView = binding.rvCurrency
         lifecycleScope.launch(Dispatchers.Main) {
-            delay(5000)
             viewModel.curencyList.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
@@ -59,11 +55,11 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                         }
                     }
                     Resource.Status.ERROR -> {
-                  Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
-            withContext(Dispatchers.IO){viewModel.getCurrencyList()}
+            viewModel.getCurrencyList()
         }
 
     }

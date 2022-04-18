@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlinx-serialization'
+
 }
 
 android {
@@ -96,5 +98,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extention_version"
 
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2'
 
 }

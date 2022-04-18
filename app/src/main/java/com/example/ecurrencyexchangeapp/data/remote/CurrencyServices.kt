@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface CurrencyServices {
      @GET("latest")
-     suspend fun changeBaseCurrency() : Call<CurrencyRateRemoteEntities>
+     fun changeBaseCurrency() : Call<CurrencyRateRemoteEntities>
 }

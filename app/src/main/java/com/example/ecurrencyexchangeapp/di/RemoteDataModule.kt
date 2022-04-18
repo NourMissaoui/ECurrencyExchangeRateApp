@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RemoteDataModule {
+object RemoteDataModule {
     @Provides
     @Singleton
     fun provideHttpClient() = OkHttpClient.Builder()
@@ -33,6 +33,10 @@ class RemoteDataModule {
             level = HttpLoggingInterceptor.Level.BODY
         }).build()
 
+    @Provides
+    fun provideGson(): Gson = GsonBuilder()
+        .create()
+
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson, httpClient: OkHttpClient): Retrofit = Retrofit.Builder()
@@ -41,7 +45,5 @@ class RemoteDataModule {
         .client(httpClient)
         .build()
 
-    @Provides
-    fun provideGson(): Gson = GsonBuilder().create()
 
 }
