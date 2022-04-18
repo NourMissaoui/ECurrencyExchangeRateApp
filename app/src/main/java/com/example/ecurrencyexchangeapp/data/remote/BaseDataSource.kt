@@ -1,24 +1,34 @@
 package com.example.ecurrencyexchangeapp.data.remote
 
-import android.content.res.Resources
+import android.util.Log
 import com.example.ecurrencyexchangeapp.utils.Resource
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 abstract class BaseDataSource {
+    private  val TAG = "BaseDataSource"
 
-    protected suspend fun <T> getResult(call: suspend () -> Response<T>): Resource<T> {
-
+    protected suspend fun <T> getResult(call: suspend () -> Call<T>): Resource<T> {
+        var result: Resource<T> = Resource.loading()
         try {
-            val response = call()
-            if (response.isSuccessful) {
-                val body = response.body()
-                if (body != null)
-                    return Resource.success(body)
-            }
-            return error("\"Network call has failed for a following reason: ${response.code()} ${response.message()}")
+            Log.i(TAG, "getResult: try")
+            call().enqueue(object : Callback<T> {
+                override fun onResponse(call: Call<T>, response: Response<T>) {
+                    response.body()?.let { result = Resource.success(response.body()!!) } ?: run {
+                        result =
+                            error("\"Network call has failed for a following reason: ${response.code()} ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<T>, t: Throwable) {
+                    result = error(t.message ?: t.toString())
+                }
+            })
         } catch (e: Exception) {
-            return error(e.message ?: e.toString())
+            Log.i(TAG, "getResult: "+e)
         }
+        return result
     }
 
     private fun <T> error(message: String): Resource<T> {

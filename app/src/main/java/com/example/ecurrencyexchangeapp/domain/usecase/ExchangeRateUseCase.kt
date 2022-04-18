@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class ExchangeRateUseCase
 @Inject constructor(private val repository: ICurrencyRepository) {
-    suspend fun getCurrencies(base: String): Flow<Resource<List<CurrencRateEntity>?>> {
+    suspend fun getCurrencies(): Flow<Resource<List<CurrencRateEntity>?>> {
+        val data = repository.getCurrencyExchangeRate()
         return flow {
-            val data = repository.getCurrencyExchangeRate(base)
             try {
                 val currencies = data.data?.rates?.ratesToList()
                 emit(Resource.success(currencies))

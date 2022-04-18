@@ -16,7 +16,8 @@ class CurrencyExchangeViewModel @Inject constructor(private val useCase: Exchang
     val _curencyList = MutableLiveData<Resource<List<CurrencRateEntity>?>>()
     var curencyList: LiveData<Resource<List<CurrencRateEntity>?>> = _curencyList
 
-    suspend fun getCurrencyList(base: String){
-        curencyList =  useCase.getCurrencies(base).asLiveData()
+    suspend fun getCurrencyList(){
+        curencyList =  useCase.getCurrencies().asLiveData()
     }
+
 }

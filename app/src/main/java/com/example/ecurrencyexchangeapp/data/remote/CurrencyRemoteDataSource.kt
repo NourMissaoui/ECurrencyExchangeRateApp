@@ -1,5 +1,6 @@
 package com.example.ecurrencyexchangeapp.data.remote
 
+import com.example.ecurrencyexchangeapp.utils.AppConstant.API_access_Key
 import javax.inject.Inject
 
 class CurrencyRemoteDataSource
@@ -7,6 +8,6 @@ class CurrencyRemoteDataSource
     private val currencyServices: CurrencyServices
 ) : BaseDataSource() {
 
-    suspend fun getCurrencyExchangeRate(base: String) =
-        getResult { currencyServices.changeBaseCurrency(base) }
+    suspend fun getCurrencyExchangeRate() =
+        getResult { currencyServices.changeBaseCurrency() }
 }

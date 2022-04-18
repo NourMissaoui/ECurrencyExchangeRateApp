@@ -20,6 +20,7 @@ import com.example.ecurrencyexchangeapp.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.Dispatcher
@@ -44,6 +45,7 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
         val flag = World.getFlagOf("se")
         val currencyRecyclerView = binding.rvCurrency
         lifecycleScope.launch(Dispatchers.Main) {
+            delay(5000)
             viewModel.curencyList.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
@@ -61,7 +63,7 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                     }
                 }
             }
-            viewModel.getCurrencyList("aaa")
+            withContext(Dispatchers.IO){viewModel.getCurrencyList()}
         }
 
     }
