@@ -52,6 +52,8 @@ dependencies {
     def gson_version = "2.8.7"
     def lifecycle_version = "2.4.1"
     def lifecycle_extention_version = "2.2.0"
+    def roomVersion = "2.4.2"
+
 
     // core
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -72,8 +74,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.9.0'
 
-    //Gson
-    implementation "com.google.code.gson:gson:$gson_version"
+//    //Gson
+//    implementation "com.google.code.gson:gson:$gson_version"
 
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
@@ -97,7 +99,22 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extention_version"
 
-
+    //serialization
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2'
+
+    //Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation("androidx.room:room-guava:$roomVersion")
+
+    // optional - Test helpers
+    testImplementation("androidx.room:room-testing:$roomVersion")
+
+    // optional - Paging 3 Integration
+    implementation("androidx.room:room-paging:2.5.0-alpha01")
 
 }

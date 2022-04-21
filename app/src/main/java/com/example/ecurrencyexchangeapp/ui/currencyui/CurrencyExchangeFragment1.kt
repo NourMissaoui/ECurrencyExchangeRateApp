@@ -46,6 +46,8 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
 
         val currencyRecyclerView = binding.rvCurrency
         lifecycleScope.launch {
+            viewModel.getCurrencyList()
+            delay(500)
             viewModel.curencyList.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
@@ -64,13 +66,12 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                     }
                     Resource.Status.LOADING -> {
                         Log.i(TAG, "onViewCreated: nour LOADING")
-
+                        binding.pr.visibility = View.VISIBLE
 
                     }
                     else -> {}
                 }
             }
-            viewModel.getCurrencyList()
         }
 
     }

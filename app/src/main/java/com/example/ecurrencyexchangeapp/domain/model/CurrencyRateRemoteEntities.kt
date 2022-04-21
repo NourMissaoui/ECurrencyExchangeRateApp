@@ -1,18 +1,17 @@
 package com.example.ecurrencyexchangeapp.domain.model
 
-
-import kotlinx.serialization.SerialName
+import com.google.gson.annotations.SerializedName
 
 
 data class CurrencyRateRemoteEntities(
-    @SerialName("base")
-    val base: String? = "",
-    @SerialName("date")
-    val date: String? = "",
-    @SerialName("rates")
-    val rates: Rates? = Rates(),
-    @SerialName("success")
-    val success: Boolean? = false,
-    @SerialName("timestamp")
-    val timestamp: Int? = 0
+    @SerializedName("success")
+    val success: Boolean?,
+    @SerializedName("timestamp")
+    val timestamp: Int?,
+    @SerializedName("base")
+    val base: String?,
+    @SerializedName("date")
+    val date: String?,
+    @SerializedName("rates")
+    val rates: Rates?
 )

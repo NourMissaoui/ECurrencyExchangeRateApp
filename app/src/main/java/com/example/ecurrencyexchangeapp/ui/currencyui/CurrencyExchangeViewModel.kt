@@ -1,13 +1,13 @@
 package com.example.ecurrencyexchangeapp.ui.currencyui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import android.content.ContentValues.TAG
+import android.util.Log
+import androidx.lifecycle.*
 import com.example.ecurrencyexchangeapp.data.remote.entities.currencyRateEntities.CurrencRateEntity
 import com.example.ecurrencyexchangeapp.domain.usecase.ExchangeRateUseCase
 import com.example.ecurrencyexchangeapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,7 +17,10 @@ class CurrencyExchangeViewModel @Inject constructor(private val useCase: Exchang
     var curencyList: LiveData<Resource<List<CurrencRateEntity>?>> = _curencyList
 
     suspend fun getCurrencyList(){
-        curencyList =  useCase.getCurrencies().asLiveData()
+viewModelScope.launch {
+    curencyList = useCase.getCurrencies().asLiveData()
+    Log.i(TAG, "getCurrencyList: ${curencyList.value} ")  }
+
     }
 
 }

@@ -11,21 +11,28 @@ abstract class BaseDataSource {
 
     protected suspend fun <T> getResult(call: suspend () -> Call<T>): Resource<T> {
         var result: Resource<T> = Resource.loading()
+        Log.i(TAG, "getResult: $result")
         try {
             call().enqueue(object : Callback<T> {
                 override fun onResponse(call: Call<T>, response: Response<T>) {
                     response.body()?.let {
                         result = Resource.success(response.body()!!)
+                        Log.i(TAG, "getResult: $result")
+
                     } ?: run {
                         result =
                             error("\"Network call has failed for a following reason: ${response.code()} ${response.message()}")
+                        Log.i(TAG, "getResult: $result")
                     }
                 }
                 override fun onFailure(call: Call<T>, t: Throwable) {
                     result = error(t.message ?: t.toString())
+                    Log.i(TAG, "getResult: $result throwable $t")
                 }
             })
         } catch (e: Exception) {
+            Log.i(TAG, "getResult: $result")
+
         }
         return result
     }

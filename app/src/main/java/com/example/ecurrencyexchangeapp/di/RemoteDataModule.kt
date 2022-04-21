@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteDataModule {
@@ -33,15 +34,15 @@ object RemoteDataModule {
             level = HttpLoggingInterceptor.Level.BODY
         }).build()
 
-    @Provides
-    fun provideGson(): Gson = GsonBuilder()
-        .create()
+//    @Provides
+//    fun provideGson(): Gson = GsonBuilder()
+//        .create()
 
     @Singleton
     @Provides
-    fun provideRetrofit(gson: Gson, httpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    fun provideRetrofit( httpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient)
         .build()
 

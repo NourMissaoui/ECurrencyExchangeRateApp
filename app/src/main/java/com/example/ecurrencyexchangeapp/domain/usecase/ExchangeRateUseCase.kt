@@ -14,11 +14,11 @@ class ExchangeRateUseCase
     val TAG = "ExchangeRateUseCase"
     suspend fun getCurrencies(): Flow<Resource<List<CurrencRateEntity>?>> {
         val data = repository.getCurrencyExchangeRate()
+        Log.i(TAG, "getCurrencies: $data")
         return flow {
-            emit(Resource.loading())
             try {
                 val currencies = data.data?.rates?.ratesToList()
-                Log.i(TAG, "getCurrencies: $currencies ")
+                Log.i(TAG, "getCurrencies:  sucess $data ")
                 emit(Resource.success(currencies))
             } catch (e: Exception) {
                 Log.i(TAG, "getCurrencies: ${e.message} ")
